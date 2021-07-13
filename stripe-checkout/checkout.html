@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Buy Cognitive Science Textbook</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <section>
+      <div class="item">
+        <img src="text-book.jpeg" alt="CogSci TextBook" />
+        <div class="info">
+          <h3>Cognitive Science TextBook</h3>
+          <h5>$120.00</h5>
+        </div>
+      </div>
+      <button type="button" id="checkout_btn">Checkout</button>
+    </section>
+  </body>
+  <script type="text/javascript">
+    const stripe_key = "xxxxxxxxxx" // Stripe public API key
+    const stripe = Stripe(stripe_key);
+    const checkout_btn = document.getElementById("checkout_btn");
+
+    checkout_btn.addEventListener("click", ()=> {
+      fetch("/checkout/create-session", {method: "POST"})
+        .then((res)=> { alert ("yeah"); return res.json()})
+        .then((session)=> {return stripe.redirectToCheckout({ sessionId: session.id })})
+        .then((data)=> {
+          if (data.error) {
+            alert(data.error.message);
+          }
+        })
+        .catch((err)=> {
+          console.log("Stripe Error:", error);
+        });
+    });
+  </script>
+</html>

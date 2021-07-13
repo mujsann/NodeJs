@@ -8,6 +8,8 @@
     "pretest": "npm install",
     "test": "cross-env PORT=8001 ./node_modules/.bin/mocha test"
   },
+  "author": "mujsann",
+  "license": "MIT",
   "dependencies": {
     "chai": "*",
     "chai-http": "*",
@@ -25,6 +27,6 @@
   "devDependencies": {
     "bluebird": "*",
     "cross-env": "*",
-    "sequelize-cli": "*"
+    "sequelize-cli": "*" 
   }
 }

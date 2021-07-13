@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .section-container {
+      max-width: 800px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    </style>
+  
+</head>
+<body>
+
+    <div id="contacts" class="container">
+        <section class="section section-container">
+            Counter: {{ counter }}
+           <span >
+               {{message}}
+           </span>
+           <button @click = "stopIt">
+            STOP
+        </button>
+        </section>
+      </div> 
+
+
+      <div id="bind-attribute">
+        <span v-bind:title="message">
+          Hover your mouse over me for a few seconds to see my dynamically bound
+          title!
+          
+        </span>
+      </div>
+      <div id="two-way-binding">
+        <p>{{ message }}</p>
+        <input v-model="message" />
+      </div>
+      
+<script>
+    // const AddUpdateContact = {
+    //     props: ['contact', 'title'],
+    //     data(){
+    //         return {
+    //             id: this.contact ? this.contact.id : null,
+    //             firstName: this.contact ? this.contact.firstName : '',
+    //             lastName: this.contact ? this.contact.lastName : '',
+    //             phone: this.contact ? this.contact.phone : '',
+
+    //             counter: 0
+    //         }
+    //     },
+    //     methods: {
+
+    //     }
+    // }
+
+const Contacts = {
+  data() {
+    return {
+      counter: 0,
+      message: 'This is a message'
+    }
+  },
+  methods: {
+      stopIt(){
+            this.message = this.message
+        .split('')
+        .reverse()
+        .join('')
+
+      }
+  },
+
+  mounted() {
+      const a = setInterval(()=>{
+          this.counter++
+      },1000)
+      setTimeout(()=>{
+        clearInterval(a)
+      }, 7000)
+  }
+
+  
+}
+
+const AttributeBinding = {
+  data() {
+    return {
+      message: 'You loaded this page on ' + new Date().toLocaleString()
+    }
+  }
+}
+
+
+const TwoWayBinding = {
+  data() {
+    return {
+      message: 'Hello Vue!'
+    }
+  }
+}
+
+
+
+Vue.createApp(TwoWayBinding).mount('#two-way-binding')
+Vue.createApp(AttributeBinding).mount('#bind-attribute')
+Vue.createApp(Contacts).mount('#contacts')
+</script>
+    
+</body>
+</html>

@@ -10,3 +10,4 @@ router.delete("/api/products/:id", controller.delete_product)
 // router.get("/api/products/:id", controller.get_product)
 
 module.exports = router;
+router.get("/recipes/shoppinglist?ids", controller.list)
